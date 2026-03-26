@@ -1,0 +1,66 @@
+{
+  "rules": [
+    {
+      "id": "auto-water",
+      "description": "Automatically water when soil moisture drops below 30%",
+      "condition": {
+        "sensor": "soil.moisture",
+        "op": "<",
+        "value": 30
+      },
+      "actions": [
+        { "action": "switch_on", "target": "pump", "duration_sec": 10 },
+        { "action": "report", "metrics": ["soil.moisture", "air.temperature", "air.humidity"] }
+      ]
+    },
+    {
+      "id": "temp-alert",
+      "description": "Alert when temperature exceeds 35°C (risk of heat stress)",
+      "condition": {
+        "sensor": "air.temperature",
+        "op": ">",
+        "value": 35
+      },
+      "actions": [
+        { "action": "alert", "message": "High temperature alert: greenhouse is too hot", "severity": "warning" },
+        { "action": "report", "metrics": ["air.temperature", "air.humidity"] }
+      ]
+    },
+    {
+      "id": "humidity-alert",
+      "description": "Alert on very high humidity (risk of fungal disease)",
+      "condition": {
+        "sensor": "air.humidity",
+        "op": ">",
+        "value": 90
+      },
+      "actions": [
+        { "action": "alert", "message": "High humidity — check ventilation", "severity": "info" }
+      ]
+    },
+    {
+      "id": "status-led-online",
+      "description": "Slow blink when connected to jettyd (device is healthy)",
+      "condition": {
+        "sensor": "system.connected",
+        "op": "==",
+        "value": 1
+      },
+      "actions": [
+        { "action": "blink", "target": "status", "interval_ms": 5000 }
+      ]
+    },
+    {
+      "id": "status-led-offline",
+      "description": "Fast blink when disconnected from jettyd",
+      "condition": {
+        "sensor": "system.connected",
+        "op": "==",
+        "value": 0
+      },
+      "actions": [
+        { "action": "blink", "target": "status", "interval_ms": 1000 }
+      ]
+    }
+  ]
+}

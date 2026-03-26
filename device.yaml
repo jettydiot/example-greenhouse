@@ -1,0 +1,52 @@
+# Smart Greenhouse Monitor — jettyd example project
+# https://github.com/jettydiot/example-greenhouse
+
+# ── Required: Provisioning ────────────────────────────────────────────────────
+jettyd:
+  fleet_token: "ft_YOUR_TOKEN_HERE"   # from app.jettyd.com after signing up
+  mqtt_uri: "mqtt://mqtt.jettyd.com:1883"
+
+# ── Required: WiFi ────────────────────────────────────────────────────────────
+wifi:
+  ssid: "YourNetworkName"
+  password: "YourNetworkPassword"
+
+# ── Device identity ───────────────────────────────────────────────────────────
+name: "greenhouse-01"
+version: "1.0.0"
+target: "esp32s3"        # esp32s3 | esp32c3 | esp32c6
+
+# ── Drivers ──────────────────────────────────────────────────────────────────
+drivers:
+  - name: dht22
+    instance: "air"
+    config:
+      pin: 4
+
+  - name: soil_moisture
+    instance: "soil"
+    config:
+      pin: 5              # ADC-capable pin
+
+  - name: relay
+    instance: "pump"
+    config:
+      pin: 6
+      active_high: false  # Most relay modules are active-low
+
+  - name: led
+    instance: "status"
+    config:
+      pin: 8
+      active_high: true
+
+# ── Telemetry ─────────────────────────────────────────────────────────────────
+defaults:
+  heartbeat_interval: 30
+  report_metrics:
+    - "air.temperature"
+    - "air.humidity"
+    - "soil.moisture"
+    - "system.rssi"
+    - "system.chip_temp"
+    # - "system.heap_free"   # uncomment for memory monitoring

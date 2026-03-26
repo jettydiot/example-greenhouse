@@ -1,0 +1,28 @@
+# ── jettyd provisioning ──────────────────────────────────────────────────────
+CONFIG_JETTYD_FLEET_TOKEN="ft_YOUR_TOKEN_HERE"
+CONFIG_JETTYD_MQTT_URI="mqtt://mqtt.jettyd.com:1883"
+CONFIG_JETTYD_FIRMWARE_VERSION="1.0.0"
+CONFIG_JETTYD_DEVICE_TYPE="greenhouse-monitor"
+
+# ── WiFi ──────────────────────────────────────────────────────────────────────
+CONFIG_JETTYD_WIFI_SSID="YourNetworkName"
+CONFIG_JETTYD_WIFI_PASSWORD="YourNetworkPassword"
+
+# ── Target: ESP32-S3 (change with idf.py set-target) ─────────────────────────
+# Supported: esp32s3 | esp32c3 | esp32c6
+# Original ESP32 is NOT supported.
+
+# ── Stack sizes ──────────────────────────────────────────────────────────────
+CONFIG_ESP_MAIN_TASK_STACK_SIZE=8192
+CONFIG_ESP_SYSTEM_EVENT_TASK_STACK_SIZE=6144
+CONFIG_MQTT_TASK_STACK_SIZE=6144
+
+# ── Flash & Partition ────────────────────────────────────────────────────────
+CONFIG_ESPTOOLPY_FLASHSIZE_4MB=y
+CONFIG_PARTITION_TABLE_CUSTOM=y
+CONFIG_PARTITION_TABLE_CUSTOM_FILENAME="partitions.csv"
+CONFIG_PARTITION_TABLE_OFFSET=0x8000
+
+# ── OTA ───────────────────────────────────────────────────────────────────────
+CONFIG_BOOTLOADER_APP_ROLLBACK_ENABLE=y
+CONFIG_FREERTOS_IDLE_TASK_STACKSIZE=1536

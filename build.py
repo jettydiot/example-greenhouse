@@ -167,8 +167,9 @@ DRIVERS = {
     "button":       ("button.h",        "button_config_t",        "button_register"),
     "soil_moisture":("soil_moisture.h", "soil_moisture_config_t", "soil_moisture_register"),
     "pwm_output":   ("pwm_output.h",    "pwm_output_config_t",    "pwm_output_register"),
-    "hcsr04":       ("hcsr04.h",        "hcsr04_config_t",        "hcsr04_register"),
-    "ina219":       ("ina219.h",        "ina219_config_t",        "ina219_register"),
+    "hcsr04":         ("hcsr04.h",           "hcsr04_config_t",           "hcsr04_register"),
+    "ina219":         ("ina219.h",           "ina219_config_t",           "ina219_register"),
+    "rgb_led_matrix": ("rgb_led_matrix.h",   "rgb_led_matrix_config_t",   "rgb_led_matrix_register"),
 }
 
 
